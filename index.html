@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Query Quest | Vedantu</title>
+<meta name="description" content="Query Quest - a 30-minute aptitude challenge for Grades 1 to 10 by Vedantu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#FF6A00; --orange-d:#E05A00; --orange-l:#FFF1E6; --orange-m:#FFD9BF;
+    --purple:#5B2A91; --purple-d:#3F1A6B; --purple-l:#F2ECFA; --purple-m:#D8C7EF;
+    --ink:#24173A; --ink-2:#4B4060; --muted:#857C96; --line:#E9E2F2;
+    --bg:#FAF7FD; --card:#FFFFFF;
+    --green:#16A34A; --green-l:#E8F7EE; --red:#DC2626; --red-l:#FDECEC;
+    --amber:#D97706; --amber-l:#FEF4E2; --grey-l:#F1EFF4;
+    --gold:#C8963E;
+    --r:16px; --shadow:0 10px 30px rgba(31,26,46,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;font-size:15px;line-height:1.5}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  .page{display:none;min-height:100vh}
+  .page.active{display:block}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:.15s}
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(255,106,0,.28)}
+  .btn-primary:hover{background:var(--orange-d)}
+  .btn-primary:disabled{background:#F3B78E;box-shadow:none;cursor:not-allowed}
+  .btn-ghost{border:1.5px solid var(--line);background:#fff;color:var(--ink-2)}
+  .btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
+  .btn-ghost:disabled{opacity:.45;cursor:not-allowed}
+  .logo{height:34px;display:block}
+
+  /* ---------- LANDING ---------- */
+  #landing{background:
+     radial-gradient(900px 520px at 100% 0%, #E6D8F7 0%, transparent 60%),
+     radial-gradient(700px 420px at 0% 100%, #FFE9D9 0%, transparent 60%), var(--bg)}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .topbar .tag{font-size:13px;color:var(--muted);font-weight:500}
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:30px 0 60px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);background:var(--purple-l);padding:6px 14px;border-radius:999px}
+  .title{font-size:clamp(44px,7vw,78px);font-weight:800;line-height:1;letter-spacing:-.03em;margin:20px 0 14px;color:var(--purple)}
+  .title span{color:var(--orange)}
+  .subtitle{font-size:18px;color:var(--ink-2);max-width:460px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:110px}
+  .chip b{display:block;font-size:20px;line-height:1.1;color:var(--purple)}
+  .chip small{color:var(--muted);font-size:12px}
+  .venue-line{margin-top:22px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .venue-line b{color:var(--ink-2)}
+  .arch{position:relative;border-radius:240px 240px 22px 22px;overflow:hidden;box-shadow:0 30px 60px rgba(63,26,107,.28);border:6px solid #fff;aspect-ratio:4/4.3}
+  .arch img{width:100%;height:100%;object-fit:cover;display:block}
+  .arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(63,26,107,.82))}
+  .arch .cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#fff;z-index:2}
+  .arch .cap b{display:block;font-size:20px;letter-spacing:.02em}
+  .arch .cap small{font-size:12px;opacity:.85;letter-spacing:.16em;text-transform:uppercase}
+  .arch-wrap{position:relative;max-width:440px;justify-self:center;width:100%}
+  .arch-wrap::before{content:"";position:absolute;inset:-14px;border:1.5px dashed var(--orange);border-radius:254px 254px 30px 30px;opacity:.55}
+
+  /* ---------- DETAILS ---------- */
+  .form-shell{max-width:560px;margin:0 auto;padding:10px 20px 60px}
+  .card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line)}
+  .form-card{padding:32px}
+  .form-card h2{font-size:26px;letter-spacing:-.01em;color:var(--purple)}
+  .form-card p.lead{color:var(--muted);margin:4px 0 24px}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+  .field label .req{color:var(--orange)}
+  .input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;background:#fff;outline:none;transition:.15s}
+  .input:focus{border-color:var(--purple);box-shadow:0 0 0 4px rgba(91,42,145,.14)}
+  .input.err{border-color:var(--red)}
+  .phone{display:flex;align-items:stretch}
+  .phone .cc{display:flex;align-items:center;padding:0 14px;border:1.5px solid var(--line);border-right:0;border-radius:12px 0 0 12px;background:var(--purple-l);font-weight:600;color:var(--purple)}
+  .phone .input{border-radius:0 12px 12px 0}
+  .grades{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .grades button{border:1.5px solid var(--line);border-radius:12px;padding:10px 0;font-weight:600;background:#fff;transition:.12s}
+  .grades button:hover{border-color:var(--purple)}
+  .grades button.sel{background:var(--purple);border-color:var(--purple);color:#fff}
+  .grades.err button{border-color:#F5B5B5}
+  .msg{color:var(--red);font-size:12.5px;margin-top:6px;min-height:1px}
+  .rules{background:var(--purple-l);border-left:4px solid var(--orange);border-radius:12px;padding:16px 18px;margin:6px 0 24px;font-size:13.5px;color:var(--ink-2)}
+  .rules b{color:var(--purple)}
+  .rules ul{padding-left:18px;margin-top:6px}
+  .rules li{margin:3px 0}
+  .form-actions{display:flex;gap:12px;justify-content:space-between;align-items:center}
+
+  /* ---------- TEST ---------- */
+  .testbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+  .testbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
+  .who{font-size:13px;color:var(--muted);text-align:center;line-height:1.3}
+  .who b{color:var(--purple);font-size:14px;display:block}
+  .timer{display:flex;align-items:center;gap:8px;font-weight:700;font-variant-numeric:tabular-nums;font-size:20px;padding:6px 16px;border-radius:999px;background:var(--purple);color:#fff}
+  .timer.warn{background:var(--amber-l);color:var(--amber)}
+  .timer.crit{background:var(--red-l);color:var(--red);animation:pulse 1s infinite}
+  @keyframes pulse{50%{opacity:.6}}
+  .progress{height:4px;background:var(--grey-l)}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--orange));width:0;transition:width .3s}
+  .test-grid{display:grid;grid-template-columns:1fr 290px;gap:24px;padding:26px 0 50px}
+  .qcard{padding:30px}
+  .qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+  .qnum{font-weight:700;color:var(--orange)}
+  .topic-tag{font-size:12px;font-weight:600;background:var(--purple-l);color:var(--purple);padding:4px 12px;border-radius:999px}
+  .qtext{font-size:20px;font-weight:600;line-height:1.45;margin-bottom:24px;white-space:pre-wrap}
+  .opts{display:grid;gap:12px}
+  .opt{display:flex;align-items:center;gap:14px;text-align:left;width:100%;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;background:#fff;font-size:16px;transition:.12s}
+  .opt:hover{border-color:var(--purple-m);background:#FCFAFE}
+  .opt .l{flex:0 0 34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:700;background:var(--purple-l);color:var(--purple)}
+  .opt.sel{border-color:var(--purple);background:var(--purple-l)}
+  .opt.sel .l{background:var(--purple);color:#fff}
+  .qnav{display:flex;justify-content:space-between;gap:10px;margin-top:28px;flex-wrap:wrap}
+  .qnav .right{display:flex;gap:10px}
+  .side{padding:22px;align-self:start;position:sticky;top:90px}
+  .side h4{font-size:14px;margin-bottom:12px;color:var(--purple)}
+  .palette{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .palette button{aspect-ratio:1;border-radius:10px;font-weight:600;font-size:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink-2)}
+  .palette button.ans{background:var(--green);border-color:var(--green);color:#fff}
+  .palette button.seen{background:var(--amber-l);border-color:#F6CF8F;color:var(--amber)}
+  .palette button.cur{outline:3px solid var(--orange);outline-offset:2px}
+  .legend{display:grid;gap:6px;margin:16px 0;font-size:12.5px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:8px}
+  .legend i{width:14px;height:14px;border-radius:4px;display:inline-block;border:1.5px solid var(--line)}
+  .counts{display:flex;justify-content:space-between;font-size:13px;border-top:1px solid var(--line);padding-top:14px;margin-bottom:14px}
+  .counts b{display:block;font-size:18px}
+  .side .btn{width:100%}
+
+  /* ---------- MODAL / LOADER ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(31,26,46,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .overlay.show{display:flex}
+  .modal{background:#fff;border-radius:20px;padding:28px;max-width:420px;width:100%;text-align:center}
+  .modal h3{font-size:20px;margin-bottom:8px}
+  .modal p{color:var(--ink-2);margin-bottom:20px}
+  .modal .row{display:flex;gap:10px;justify-content:center}
+  .spinner{width:46px;height:46px;border-radius:50%;border:4px solid var(--purple-m);border-top-color:var(--orange);animation:spin 1s linear infinite;margin:0 auto 14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader-box{background:#fff;border-radius:18px;padding:28px 34px;text-align:center;font-weight:500}
+
+  /* ---------- REPORT ---------- */
+  .rep-head{background:radial-gradient(600px 300px at 100% 0%,rgba(255,106,0,.45),transparent 70%),linear-gradient(135deg,#3F1A6B,#5B2A91);color:#fff;padding:0 0 70px}
+  .rep-head .topbar .logo{filter:brightness(0) invert(1)}
+  .rep-head .topbar .tag{color:rgba(255,255,255,.85)}
+  .rep-hero{display:flex;align-items:center;gap:34px;flex-wrap:wrap;padding-top:10px}
+  .ring{--p:0;width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--orange) calc(var(--p)*1%),rgba(255,255,255,.2) 0);display:grid;place-items:center;flex:0 0 auto}
+  .ring>div{width:118px;height:118px;border-radius:50%;background:#4A2079;display:grid;place-items:center;text-align:center;line-height:1.1}
+  .ring b{font-size:34px;display:block}
+  .ring small{font-size:12px;opacity:.9}
+  .rep-id h2{font-size:30px;letter-spacing:-.01em}
+  .rep-id p{opacity:.9;font-size:14px}
+  .verdict{display:inline-block;margin-top:10px;background:var(--orange);padding:5px 14px;border-radius:999px;font-weight:600;font-size:13px}
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:-44px}
+  .stat{padding:18px;text-align:left}
+  .stat small{color:var(--muted);font-size:12px;font-weight:500}
+  .stat b{display:block;font-size:24px;margin-top:2px}
+  .stat.g b{color:var(--green)} .stat.r b{color:var(--red)} .stat.a b{color:var(--amber)}
+  .section{margin-top:28px}
+  .section h3{font-size:18px;margin-bottom:12px;color:var(--purple);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .two{display:grid;grid-template-columns:1fr 1.4fr;gap:20px}
+  .pad{padding:22px}
+  .mistake-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .mistake-row:last-child{border-bottom:0}
+  .mistake-row .n{font-size:22px;font-weight:700;width:42px}
+  .mistake-row p{font-size:13px;color:var(--muted)}
+  .mistake-row b{font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font-size:12px;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .bar{height:6px;background:var(--grey-l);border-radius:4px;overflow:hidden;min-width:60px;margin-top:6px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--orange))}
+  .pill{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .pill.ok{background:var(--green-l);color:var(--green)}
+  .pill.bad{background:var(--red-l);color:var(--red)}
+  .pill.skip{background:var(--grey-l);color:var(--ink-2)}
+  .pill.rush{background:var(--amber-l);color:var(--amber)}
+  .table-scroll{overflow-x:auto}
+  .qr{border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:12px;overflow:hidden}
+  .qr summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:14px 16px}
+  .qr summary::-webkit-details-marker{display:none}
+  .qr .no{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700}
+  .qr.c .no{background:var(--green-l);color:var(--green)}
+  .qr.w .no{background:var(--red-l);color:var(--red)}
+  .qr.s .no{background:var(--grey-l);color:var(--ink-2)}
+  .qr .qt{font-weight:600;font-size:14.5px}
+  .qr .sub{font-size:12px;color:var(--muted)}
+  .qr .meta{display:flex;gap:8px;align-items:center}
+  .qr .t{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .qr-body{padding:0 16px 18px 72px;display:grid;gap:12px}
+  .ans-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ans{border-radius:10px;padding:10px 12px;font-size:13.5px}
+  .ans small{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.8}
+  .ans.you{background:var(--grey-l)} .ans.you.bad{background:var(--red-l);color:#8F1D1D} .ans.you.ok{background:var(--green-l);color:#0F6A31}
+  .ans.key{background:var(--green-l);color:#0F6A31}
+  .box{border-radius:10px;padding:12px 14px;font-size:13.5px}
+  .box small{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+  .box.mis{background:var(--amber-l);color:#7A4A06}
+  .box.sol{background:var(--purple-l);color:var(--ink-2)}
+  .box.sol small{color:var(--purple)}
+  .rep-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .foot{text-align:center;color:var(--muted);font-size:12px;padding:30px 0 40px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:34px;padding-top:6px}
+    .arch-wrap{max-width:340px;order:-1}
+    .test-grid{grid-template-columns:1fr}
+    .side{position:static}
+    .stats{grid-template-columns:repeat(3,1fr)}
+    .two{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    html,body{font-size:14px}
+    .wrap{padding:0 16px}
+    .form-card,.qcard{padding:22px 18px}
+    .qtext{font-size:17px}
+    .qnav{flex-wrap:nowrap;gap:8px}
+    .qnav .right{gap:8px}
+    .qnav .btn{padding:11px 15px;font-size:14px}
+    .who{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .qr-body{padding-left:16px}
+    .ans-grid{grid-template-columns:1fr}
+    .qr summary{grid-template-columns:40px 1fr}
+    .qr .meta{grid-column:2}
+    .palette{grid-template-columns:repeat(8,1fr)}
+    .ring{width:120px;height:120px}.ring>div{width:94px;height:94px}.ring b{font-size:26px}
+  }
+  @media print{
+    .no-print{display:none!important}
+    body{background:#fff}
+    .rep-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .qr{break-inside:avoid}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- =============== PAGE 1: LANDING =============== -->
+<section id="landing" class="page active">
+  <div class="wrap">
+    <div class="topbar">
+      <img class="logo js-logo" src="assets/vedantu-logo.png" alt="Vedantu">
+      <div class="tag">Aptitude Challenge 2026</div>
+    </div>
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Vedantu presents</span>
+        <h1 class="title">Query<br><span>Quest</span></h1>
+        <p class="subtitle">A 30-minute aptitude challenge for Grades 1 to 10. Solve, think fast, and get your detailed report instantly.</p>
+        <div class="chips">
+          <div class="chip"><b>15</b><small>Questions</small></div>
+          <div class="chip"><b>30 min</b><small>Duration</small></div>
+          <div class="chip"><b>Instant</b><small>Score report</small></div>
+        </div>
+        <button class="btn btn-primary" onclick="go('details')">Start the Quest &rarr;</button>
+        <div class="venue-line">&#128205; Venue: <b>Sobha Royal Pavilion</b></div>
+      </div>
+      <div class="arch-wrap">
+        <div class="arch">
+          <img class="js-venue" src="assets/sobha-royal-pavilion.jpg" alt="Sobha Royal Pavilion">
+          <div class="cap"><small>Venue</small><b>Sobha Royal Pavilion</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PAGE 2: STUDENT DETAILS =============== -->
+<section id="details" class="page">
+  <div class="wrap"><div class="topbar"><img class="logo js-logo" src="assets/vedantu-logo.png" alt="Vedantu"><div class="tag">Query Quest</div></div></div>
+  <div class="form-shell">
+    <div class="card form-card">
+      <h2>Tell us about you</h2>
+      <p class="lead">All fields are mandatory to start the test.</p>
+
+      <div class="field">
+        <label for="fName">Student Name <span class="req">*</span></label>
+        <input id="fName" class="input" type="text" maxlength="60" placeholder="Enter full name" autocomplete="name">
+        <div class="msg" id="mName"></div>
+      </div>
+
+      <div class="field">
+        <label>Grade <span class="req">*</span></label>
+        <div class="grades" id="gradeBox"></div>
+        <div class="msg" id="mGrade"></div>
+      </div>
+
+      <div class="field">
+        <label for="fMobile">Mobile Number <span class="req">*</span></label>
+        <div class="phone">
+          <span class="cc">+91</span>
+          <input id="fMobile" class="input" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number">
+        </div>
+        <div class="msg" id="mMobile"></div>
+      </div>
+
+      <div class="rules">
+        <b>Before you begin</b>
+        <ul>
+          <li>15 multiple-choice questions based on your grade.</li>
+          <li>Total time: <b>30 minutes</b>. The test submits automatically when time ends.</li>
+          <li>You can move between questions and change answers before submitting.</li>
+          <li>No negative marking. Each correct answer = 1 mark.</li>
+        </ul>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="go('landing')">&larr; Back</button>
+        <button class="btn btn-primary" id="btnBegin" onclick="beginTest()">Begin Test &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PAGE 3: TEST =============== -->
+<section id="test" class="page">
+  <div class="testbar">
+    <div class="wrap">
+      <img class="logo js-logo" src="assets/vedantu-logo.png" alt="Vedantu" style="height:28px">
+      <div class="who"><b id="tWho"></b><span id="tGrade"></span></div>
+      <div class="timer" id="timer">&#9201; <span id="tLeft">30:00</span></div>
+    </div>
+    <div class="progress"><i id="prog"></i></div>
+  </div>
+  <div class="wrap">
+    <div class="test-grid">
+      <div class="card qcard">
+        <div class="qmeta">
+          <span class="qnum" id="qNum">Question 1 of 15</span>
+          <span class="topic-tag" id="qTopic"></span>
+        </div>
+        <div class="qtext" id="qText"></div>
+        <div class="opts" id="qOpts"></div>
+        <div class="qnav">
+          <button class="btn btn-ghost" id="btnPrev" onclick="move(-1)">&larr; Previous</button>
+          <div class="right">
+            <button class="btn btn-ghost" onclick="clearAns()">Clear</button>
+            <button class="btn btn-primary" id="btnNext" onclick="move(1)">Next &rarr;</button>
+          </div>
+        </div>
+      </div>
+      <aside class="card side">
+        <h4>Question Palette</h4>
+        <div class="palette" id="palette"></div>
+        <div class="legend">
+          <span><i style="background:var(--green);border-color:var(--green)"></i>Answered</span>
+          <span><i style="background:var(--amber-l);border-color:#F6CF8F"></i>Visited, not answered</span>
+          <span><i></i>Not visited</span>
+        </div>
+        <div class="counts">
+          <div>Answered<b id="cAns">0</b></div>
+          <div style="text-align:right">Remaining<b id="cRem">15</b></div>
+        </div>
+        <button class="btn btn-primary" onclick="askSubmit()">Submit Test</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PAGE 4: REPORT =============== -->
+<section id="report" class="page">
+  <div class="rep-head">
+    <div class="wrap">
+      <div class="topbar"><img class="logo js-logo" src="assets/vedantu-logo.png" alt="Vedantu"><div class="tag" id="rDate"></div></div>
+      <div class="rep-hero">
+        <div class="ring" id="rRing"><div><span><b id="rScore">0</b><small id="rMax">out of 15</small></span></div></div>
+        <div class="rep-id">
+          <p>Query Quest &middot; Score Report</p>
+          <h2 id="rName"></h2>
+          <p id="rInfo"></p>
+          <span class="verdict" id="rVerdict"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats" id="rStats"></div>
+
+    <div class="section two">
+      <div class="card pad">
+        <h3>Type of Mistakes</h3>
+        <div id="rMistakes"></div>
+      </div>
+      <div class="card pad">
+        <h3>Topic-wise Performance</h3>
+        <div class="table-scroll"><table id="rTopics"></table></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>
+        <span>Question-wise Analysis &amp; Detailed Solutions</span>
+        <span class="rep-actions no-print">
+          <button class="btn btn-ghost" style="padding:8px 16px;font-size:13px" onclick="toggleAll()" id="btnExp">Expand all</button>
+        </span>
+      </h3>
+      <div class="card pad table-scroll" style="margin-bottom:16px">
+        <table id="rTable"></table>
+      </div>
+      <div id="rQs"></div>
+    </div>
+
+    <div class="section rep-actions no-print" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="printReport()">&#128424; Print / Save as PDF</button>
+      <button class="btn btn-primary" onclick="location.reload()">Back to Home</button>
+    </div>
+    <div class="foot">Query Quest &middot; Vedantu &middot; Sobha Royal Pavilion</div>
+  </div>
+</section>
+
+<!-- =============== OVERLAYS =============== -->
+<div class="overlay" id="loader"><div class="loader-box"><div class="spinner"></div><div id="loaderTxt">Loading...</div></div></div>
+<div class="overlay" id="confirm">
+  <div class="modal">
+    <h3>Submit your test?</h3>
+    <p id="confirmTxt"></p>
+    <div class="row">
+      <button class="btn btn-ghost" onclick="hide('confirm')">Keep solving</button>
+      <button class="btn btn-primary" onclick="hide('confirm');submit(false)">Yes, submit</button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="errBox">
+  <div class="modal">
+    <h3>Something went wrong</h3>
+    <p id="errTxt"></p>
+    <div class="row"><button class="btn btn-primary" id="errBtn" onclick="hide('errBox')">OK</button></div>
+  </div>
+</div>
+
+<script>
+/* ======================= CONFIG =======================
+   Paste your Apps Script Web App URL below (Deploy > Manage deployments > Web app URL).
+   It looks like: https://script.google.com/macros/s/AKfycb..../exec
+   (or, from a company account: https://script.google.com/a/macros/yourdomain.com/s/AKfycb..../exec) */
+var API_URL = 'https://script.google.com/macros/s/AKfycbyjrXBclhfTAEgAv_FzHtn5l6dK3v0hZMxZdH-IL6WI6oKA2Uq3N2VTtI-KiN8DpWsL/exec';
+
+/* ======================= STATE ======================= */
+var S = {
+  student:null, attemptId:null, questions:[], answers:{}, times:{}, visited:{},
+  cur:0, enteredAt:0, endAt:0, startedAt:0, tick:null, submitting:false, done:false, grade:null
+};
+
+/* ======================= SERVER CALLS =======================
+   Replaces google.script.run. Sends JSON as text/plain (no CORS preflight),
+   Apps Script answers { ok, data } or { ok:false, error, retry }.
+   Temporary failures (network, busy server) are retried automatically.        */
+function api(action, data, tries){
+  tries = tries || 3;
+  return new Promise(function(resolve, reject){
+    if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(API_URL) && !/^https?:\/\/localhost[:\/]/.test(API_URL)) {
+      reject(new Error('The test server is not connected yet. (Admin: paste the Apps Script Web App URL ending in /exec into API_URL in index.html.)'));
+      return;
+    }
+    var attempt = 0;
+    (function call(){
+      attempt++;
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 45000) : null;
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: action, data: data }),
+        redirect: 'follow',
+        signal: ctrl ? ctrl.signal : undefined
+      })
+      .then(function(r){ if (!r.ok) throw new Error('Server returned ' + r.status); return r.json(); })
+      .then(function(res){
+        if (timer) clearTimeout(timer);
+        if (res && res.ok) { resolve(res.data); return; }
+        var e = new Error((res && res.error) || 'Unexpected response from the server.');
+        e.final = !(res && res.retry);
+        throw e;
+      })
+      .catch(function(e){
+        if (timer) clearTimeout(timer);
+        if (!e.final && attempt < tries) { setTimeout(call, 1500 * attempt); return; }
+        if (e.final) reject(e);
+        else if (e.name === 'AbortError') reject(new Error('The server took too long to respond.'));
+        else reject(new Error(/Failed to fetch|NetworkError|Load failed|Server returned/i.test(e.message) ? 'Could not reach the server. Please check the internet connection.' : e.message));
+      });
+    })();
+  });
+}
+
+/* ======================= INIT ======================= */
+(function buildGrades(){
+  var box = document.getElementById('gradeBox');
+  for (var g = 1; g <= 10; g++) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = g; b.dataset.g = g;
+    b.onclick = function(){
+      S.grade = Number(this.dataset.g);
+      box.querySelectorAll('button').forEach(function(x){ x.classList.remove('sel'); });
+      this.classList.add('sel'); box.classList.remove('err'); setMsg('mGrade','');
+    };
+    box.appendChild(b);
+  }
+})();
+
+var mob = document.getElementById('fMobile');
+mob.addEventListener('input', function(){ this.value = this.value.replace(/\D/g,'').slice(0,10); this.classList.remove('err'); setMsg('mMobile',''); });
+document.getElementById('fName').addEventListener('input', function(){ this.classList.remove('err'); setMsg('mName',''); });
+
+/* ======================= HELPERS ======================= */
+function go(id){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function show(id){ document.getElementById(id).classList.add('show'); }
+function hide(id){ document.getElementById(id).classList.remove('show'); }
+function loading(on, txt){ document.getElementById('loaderTxt').textContent = txt || 'Loading...'; on ? show('loader') : hide('loader'); }
+function setMsg(id, t){ document.getElementById(id).textContent = t; }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function mmss(sec){ sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec/60), s = sec%60; return (m<10?'0':'')+m+':'+(s<10?'0':'')+s; }
+function dur(sec){ sec = Math.round(sec||0); if (sec < 60) return sec + 's'; return Math.floor(sec/60) + 'm ' + (sec%60<10?'0':'') + (sec%60) + 's'; }
+function err(msg, btnTxt, fn){
+  document.getElementById('errTxt').textContent = msg;
+  var b = document.getElementById('errBtn'); b.textContent = btnTxt || 'OK';
+  b.onclick = function(){ hide('errBox'); if (fn) fn(); };
+  show('errBox');
+}
+
+/* ======================= DETAILS -> START ======================= */
+function beginTest(){
+  var name = document.getElementById('fName').value.trim();
+  var mobile = mob.value.trim();
+  var ok = true;
+  if (name.length < 2 || /[\d@#$%^&*()_+=<>?\/\\|{}\[\]~`!;:]/.test(name)) { setMsg('mName','Please enter a valid name (letters only).'); document.getElementById('fName').classList.add('err'); ok = false; }
+  if (!S.grade) { setMsg('mGrade','Please select your grade.'); document.getElementById('gradeBox').classList.add('err'); ok = false; }
+  if (!/^[6-9]\d{9}$/.test(mobile)) { setMsg('mMobile','Please enter a valid 10-digit mobile number.'); mob.classList.add('err'); ok = false; }
+  if (!ok) return;
+
+  loading(true, 'Preparing your Grade ' + S.grade + ' questions...');
+  api('start', { name:name, grade:S.grade, mobile:mobile })
+    .then(function(res){ loading(false); startTestUI(res); })
+    .catch(function(e){ loading(false); err(e.message || String(e)); });
+}
+
+function startTestUI(res){
+  S.student = res.student; S.attemptId = res.attemptId; S.questions = res.questions;
+  S.answers = {}; S.times = {}; S.visited = {}; S.cur = 0;
+  S.questions.forEach(function(q){ S.times[q.qno] = 0; });
+  document.getElementById('tWho').textContent = res.student.name;
+  document.getElementById('tGrade').textContent = 'Grade ' + res.student.grade;
+
+  // palette
+  var pal = document.getElementById('palette'); pal.innerHTML = '';
+  S.questions.forEach(function(q, i){
+    var b = document.createElement('button'); b.textContent = i + 1;
+    b.onclick = function(){ jump(i); }; pal.appendChild(b);
+  });
+
+  S.startedAt = Date.now();
+  S.endAt = S.startedAt + res.durationSec * 1000;
+  S.enteredAt = Date.now();
+  go('test');
+  render();
+  S.tick = setInterval(tick, 500); tick();
+  window.addEventListener('beforeunload', guard);
+}
+function guard(e){ if (!S.done) { e.preventDefault(); e.returnValue = ''; } }
+
+/* ======================= TIMER ======================= */
+function tick(){
+  var left = Math.ceil((S.endAt - Date.now()) / 1000);
+  document.getElementById('tLeft').textContent = mmss(left);
+  var t = document.getElementById('timer');
+  t.className = 'timer' + (left <= 60 ? ' crit' : left <= 300 ? ' warn' : '');
+  if (left <= 0 && !S.submitting) { hide('confirm'); submit(true); }
+}
+
+/* ======================= QUESTION FLOW ======================= */
+function logTime(){
+  var q = S.questions[S.cur]; if (!q) return;
+  var now = Date.now();
+  S.times[q.qno] += (now - S.enteredAt) / 1000;
+  S.enteredAt = now;
+}
+function jump(i){ if (i < 0 || i >= S.questions.length) return; logTime(); S.cur = i; render(); }
+function move(d){
+  if (d > 0 && S.cur === S.questions.length - 1) { askSubmit(); return; }
+  jump(S.cur + d);
+}
+function pick(letter){ var q = S.questions[S.cur]; S.answers[q.qno] = letter; render(); }
+function clearAns(){ var q = S.questions[S.cur]; delete S.answers[q.qno]; render(); }
+
+function render(){
+  var q = S.questions[S.cur], n = S.questions.length;
+  S.visited[q.qno] = true;
+  document.getElementById('qNum').textContent = 'Question ' + (S.cur + 1) + ' of ' + n;
+  document.getElementById('qTopic').textContent = q.topic;
+  document.getElementById('qText').textContent = q.question;
+  var box = document.getElementById('qOpts'); box.innerHTML = '';
+  ['A','B','C','D'].forEach(function(L){
+    if (q.options[L] === '' || q.options[L] == null) return;
+    var b = document.createElement('button');
+    b.className = 'opt' + (S.answers[q.qno] === L ? ' sel' : '');
+    b.innerHTML = '<span class="l">' + L + '</span><span>' + esc(q.options[L]) + '</span>';
+    b.onclick = function(){ pick(L); };
+    box.appendChild(b);
+  });
+  document.getElementById('btnPrev').disabled = S.cur === 0;
+  document.getElementById('btnNext').innerHTML = S.cur === n - 1 ? 'Finish &check;' : 'Next &rarr;';
+
+  var answered = Object.keys(S.answers).length;
+  document.getElementById('cAns').textContent = answered;
+  document.getElementById('cRem').textContent = n - answered;
+  document.getElementById('prog').style.width = (answered / n * 100) + '%';
+  var pb = document.getElementById('palette').children;
+  S.questions.forEach(function(x, i){
+    pb[i].className = (S.answers[x.qno] ? 'ans' : S.visited[x.qno] ? 'seen' : '') + (i === S.cur ? ' cur' : '');
+  });
+}
+
+/* ======================= SUBMIT ======================= */
+function askSubmit(){
+  var n = S.questions.length, a = Object.keys(S.answers).length;
+  document.getElementById('confirmTxt').textContent =
+    'You have answered ' + a + ' of ' + n + ' questions.' + (a < n ? ' ' + (n - a) + ' question(s) are still unanswered.' : '') +
+    ' Time left: ' + mmss((S.endAt - Date.now()) / 1000) + '.';
+  show('confirm');
+}
+
+function submit(auto){
+  if (S.submitting) return;
+  S.submitting = true;
+  logTime();
+  clearInterval(S.tick);
+  var totalSec = Math.min((Date.now() - S.startedAt) / 1000, (S.endAt - S.startedAt) / 1000);
+  var times = {}; Object.keys(S.times).forEach(function(k){ times[k] = Math.round(S.times[k]); });
+  var payload = { attemptId:S.attemptId, student:S.student, answers:S.answers, times:times, totalSec:Math.round(totalSec), autoSubmitted:!!auto };
+  send(payload, auto);
+}
+function send(payload, auto){
+  loading(true, auto ? "Time's up! Submitting your answers..." : 'Submitting and preparing your report...');
+  api('submit', payload, 4)
+    .then(function(rep){ loading(false); S.done = true; window.removeEventListener('beforeunload', guard); renderReport(rep); })
+    .catch(function(e){ loading(false); err('Could not submit: ' + (e.message || e) + ' Your answers are safe on this screen.', 'Retry', function(){ send(payload, auto); }); });
+}
+
+/* ======================= REPORT ======================= */
+function renderReport(r){
+  var s = r.summary, st = r.student;
+  document.getElementById('rDate').textContent = new Date().toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' });
+  document.getElementById('rScore').textContent = s.score;
+  document.getElementById('rMax').textContent = 'out of ' + s.maxScore;
+  document.getElementById('rRing').style.setProperty('--p', s.percent);
+  document.getElementById('rName').textContent = st.name;
+  document.getElementById('rInfo').textContent = 'Grade ' + st.grade + '  ·  +91 ' + st.mobile + '  ·  ' + r.attemptId;
+  var v = s.percent >= 85 ? 'Excellent performance' : s.percent >= 65 ? 'Good performance' : s.percent >= 40 ? 'Fair, keep practising' : 'Needs improvement';
+  document.getElementById('rVerdict').textContent = v + (s.autoSubmitted ? '  ·  Auto-submitted at time limit' : '');
+
+  var tiles = [
+    ['Score', s.score + '/' + s.maxScore, ''],
+    ['Correct', s.correct, 'g'],
+    ['Incorrect', s.incorrect, 'r'],
+    ['Not Attempted', s.skipped, 'a'],
+    ['Accuracy', s.accuracy + '%', ''],
+    ['Time Taken', mmss(s.totalSec), '']
+  ];
+  document.getElementById('rStats').innerHTML = tiles.map(function(t){
+    return '<div class="card stat ' + t[2] + '"><small>' + t[0] + '</small><b>' + t[1] + '</b></div>';
+  }).join('');
+
+  // Type of mistakes summary
+  var wrong = r.rows.filter(function(x){ return x.status === 'Incorrect'; });
+  var mHtml =
+    mRow(s.conceptual, 'Conceptual', 'Wrong answer after spending time on it. Revise the concept.', 'var(--red)') +
+    mRow(s.rushed, 'Rushed / Guessed', 'Wrong answer given in under 10 seconds. Read the question fully.', 'var(--amber)') +
+    mRow(s.skipped, 'Not Attempted', 'Left unanswered. Attempt every question, there is no negative marking.', 'var(--muted)');
+  if (wrong.length) {
+    mHtml += '<div style="margin-top:14px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Specific mistakes found</div><ul style="padding-left:18px;margin-top:6px;font-size:13px;color:var(--ink-2)">' +
+      wrong.map(function(x){ return '<li style="margin:4px 0"><b>Q' + x.sno + ' (' + esc(x.topic) + '):</b> ' + esc(x.mistake) + '</li>'; }).join('') + '</ul>';
+  } else if (!s.skipped) {
+    mHtml += '<p style="margin-top:12px;color:var(--green);font-weight:600">No mistakes. Outstanding!</p>';
+  }
+  document.getElementById('rMistakes').innerHTML = mHtml;
+
+  // Topic table
+  document.getElementById('rTopics').innerHTML =
+    '<tr><th>Topic</th><th class="num">Correct</th><th class="num">Score %</th><th class="num">Time</th></tr>' +
+    r.topics.map(function(t){
+      var p = Math.round(t.correct / t.total * 100);
+      return '<tr><td>' + esc(t.topic) + '<div class="bar"><i style="width:' + p + '%"></i></div></td><td class="num">' + t.correct + '/' + t.total + '</td><td class="num">' + p + '%</td><td class="num">' + dur(t.time) + '</td></tr>';
+    }).join('');
+
+  // Summary table
+  document.getElementById('rTable').innerHTML =
+    '<tr><th>Q</th><th>Topic</th><th>Your Answer</th><th>Correct</th><th>Result</th><th>Type of Mistake</th><th class="num">Time</th></tr>' +
+    r.rows.map(function(x){
+      return '<tr><td>' + x.sno + '</td><td>' + esc(x.topic) + '</td><td>' + (x.yourAnswer || '-') + '</td><td>' + x.correctAnswer + '</td><td>' + pill(x.status) + '</td><td>' + catPill(x.category) + '</td><td class="num">' + dur(x.timeSec) + '</td></tr>';
+    }).join('');
+
+  // Detailed cards
+  document.getElementById('rQs').innerHTML = r.rows.map(function(x){
+    var cls = x.status === 'Correct' ? 'c' : x.status === 'Incorrect' ? 'w' : 's';
+    var you = x.yourAnswer ? (x.yourAnswer + '. ' + esc(x.yourAnswerText)) : 'Not attempted';
+    var youCls = x.status === 'Correct' ? 'ok' : x.status === 'Incorrect' ? 'bad' : '';
+    return '<details class="qr ' + cls + '"' + (cls !== 'c' ? ' open' : '') + '>' +
+      '<summary><span class="no">' + x.sno + '</span><span><div class="qt">' + esc(x.question) + '</div><div class="sub">' + esc(x.topic) + '</div></span>' +
+      '<span class="meta">' + pill(x.status) + '<span class="t">&#9201; ' + dur(x.timeSec) + '</span></span></summary>' +
+      '<div class="qr-body">' +
+        '<div class="ans-grid"><div class="ans you ' + youCls + '"><small>Your answer</small>' + you + '</div>' +
+        '<div class="ans key"><small>Correct answer</small>' + x.correctAnswer + '. ' + esc(x.correctAnswerText) + '</div></div>' +
+        (x.status !== 'Correct' ? '<div class="box mis"><small>Type of mistake &middot; ' + esc(x.category) + '</small>' + esc(x.mistake) + '</div>' : '') +
+        '<div class="box sol"><small>Detailed solution</small>' + esc(x.solution) + '</div>' +
+      '</div></details>';
+  }).join('');
+
+  go('report');
+}
+function mRow(n, title, desc, color){
+  return '<div class="mistake-row"><span class="n" style="color:' + color + '">' + n + '</span><div><b>' + title + '</b><p>' + desc + '</p></div></div>';
+}
+function pill(st){ return '<span class="pill ' + (st === 'Correct' ? 'ok' : st === 'Incorrect' ? 'bad' : 'skip') + '">' + st + '</span>'; }
+function catPill(c){
+  if (c === '-') return '<span style="color:var(--muted)">-</span>';
+  return '<span class="pill ' + (c === 'Conceptual' ? 'bad' : c === 'Rushed / Guessed' ? 'rush' : 'skip') + '">' + c + '</span>';
+}
+var expanded = false;
+function toggleAll(){
+  expanded = !expanded;
+  document.querySelectorAll('#rQs details').forEach(function(d){ d.open = expanded; });
+  document.getElementById('btnExp').textContent = expanded ? 'Collapse all' : 'Expand all';
+}
+function printReport(){
+  document.querySelectorAll('#rQs details').forEach(function(d){ d.open = true; });
+  window.print();
+}
+</script>
+</body>
+</html>
